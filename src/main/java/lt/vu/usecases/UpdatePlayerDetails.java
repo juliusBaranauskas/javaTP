@@ -39,7 +39,7 @@ public class UpdatePlayerDetails implements Serializable {
     @Transactional
     @LoggedInvocation
     public String updatePlayerJerseyNumber() {
-        try{
+        try {
             playersDAO.update(this.player);
         } catch (OptimisticLockException e) {
             return "/playerDetails.xhtml?faces-redirect=true&playerId=" + this.player.getId() + "&error=optimistic-lock-exception";

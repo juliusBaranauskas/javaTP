@@ -24,5 +24,14 @@
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
             <ignoreColumn column="opt_lock_version" />
         </table>
+        <!--<table schema="public" tableName="rating">
+            <generatedKey column="id" identity="true" sqlStatement="JDBC" />
+        </table>
+        <table schema="public" tableName="language">
+            <generatedKey column="id" identity="true" sqlStatement="JDBC" />
+        </table>
+        <table schema="public" tableName="game">
+            <generatedKey column="id" identity="true" sqlStatement="JDBC" />
+        </table>-->
     </context>
 </generatorConfiguration>
