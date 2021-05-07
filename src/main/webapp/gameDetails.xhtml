@@ -7,31 +7,35 @@
       xmlns:f="http://java.sun.com/jsf/core">
 <h:head/>
 <h:body>
-    <h2>#{gameDetails.game.name}</h2><br/>
-    <p>#{gameDetails.game.description}</p><br/>
+   <h2>#{gameDetails.game.name}</h2><br/>
+   <p>#{gameDetails.game.description}</p><br/>
 
-    <h3>Available in languages:</h3><br/>
-    <ul>
-        <ui:repeat value="#{gameDetails.game.languages}" var="lang">
-            <li>
-                <span>#{lang.name}</span>
-            </li>
-        </ui:repeat>
-    </ul><br/>
+   <h3>Available in languages:</h3><br/>
+   <ul>
+      <ui:repeat value="#{gameDetails.game.languages}" var="lang">
+         <li>
+            <span>#{lang.name}</span>
+         </li>
+      </ui:repeat>
+   </ul><br/>
 
-    <h3>Rated #{gameDetails.averageRating} / 10 </h3><br/>
+   <h3>Rated #{gameDetails.averageRating} / 10 </h3><br/>
 
-    <h3>Add/edit details</h3>
-    <h:form>
-        <h:inputText value="#{gameDetails.game.name}" required="true" />
-        <h:inputText value="#{gameDetails.game.description}" required="true" />
-        <h:inputText value="#{gameDetails.newRatingScore}" required="true" />
+   <h3>Add/edit details</h3>
+   <h:form>
+      <h:inputText a:placeholder="currentName" value="#{gameDetails.gameDetails.name}" required="true" />
+      <h:inputText a:placeholder="game description" value="#{gameDetails.gameDetails.description}" required="true" />
+      <h:inputText a:placeholder="your rating [number]" value="#{gameDetails.ratingToAdd.score}" required="true" />
+      <h:selectManyListbox value="#{gameDetails.selectedLanguages}">
+         <f:selectItems var="l" value="#{gameDetails.allLanguages}"
+                        itemLabel="#{l.name}" itemValue="#{l.id}" />
+      </h:selectManyListbox>
 
-        <h:commandButton value="Update" action="#{gameDetails.editGame}" >
-            <f:param name="gameId" value="#{gameDetails.game.id}" />
-        </h:commandButton>
-    </h:form>
+      <h:commandButton value="Update" action="#{gameDetails.editGame}" >
+         <f:param name="gameId" value="#{gameDetails.game.id}" />
+      </h:commandButton>
+   </h:form>
 
-    <h:link value="Back home" outcome="/index"/>
+   <h:link value="Back home" outcome="/index"/>
 </h:body>
 </html>

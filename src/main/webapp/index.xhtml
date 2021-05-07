@@ -6,7 +6,9 @@
 >
 <h:head/>
 <h:body>
-    <h2>Games:</h2>
+
+    <h1>Not that epic games store</h1>
+    <h2>Available games:</h2>
     <ol>
         <ui:repeat value="#{games.allGames}" var="game">
             <span><h:link value="#{game.name}" outcome="gameDetails?gameId=#{game.id}" /></span><br/>
@@ -17,6 +19,9 @@
         <h:inputText value="#{games.gameToAdd.name}" required="true" />
         <h:commandButton value="Wanna sell?" action="#{games.addGame}"/>
     </h:form>
+    <br/>
 
+    <span><h:link value="Add/View game languages" outcome="languageCreation" /></span><br/>
+    <span><h:link value="Add/View game languages (MyBatis)" outcome="myBatis/languages" /></span><br/>
 </h:body>
 </html>

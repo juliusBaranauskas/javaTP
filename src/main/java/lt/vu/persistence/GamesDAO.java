@@ -1,5 +1,6 @@
 package lt.vu.persistence;
 
+import lombok.Setter;
 import lt.vu.entities.Game;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -11,6 +12,7 @@ import java.util.List;
 public class GamesDAO {
 
     @Inject
+    @Setter
     private EntityManager em;
 
     public List<Game> loadAll() {

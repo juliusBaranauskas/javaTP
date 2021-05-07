@@ -7,8 +7,8 @@
     <Resource id="PlayersDataSource" type="DataSource">
         JdbcDriver = org.h2.Driver
         JdbcUrl = jdbc:h2:~/h2database/PlayerDB;AUTO_SERVER=TRUE;
-        UserName = sa
-        Password = sa
+        UserName = as
+        Password = as
         InitialSize = 1
         MaxActive = 10
         MaxWaitTime = 10 seconds

@@ -25,7 +25,7 @@ public class RatingsDAO {
         this.em = em;
     }
 
-    public void persist(Rating rating){
+    public void persist(Rating rating) {
         this.em.persist(rating);
     }
 

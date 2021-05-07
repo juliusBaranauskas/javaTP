@@ -4,11 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="lt.vu.mybatis.model.Team" alias="Team"/>
-        <typeAlias type="lt.vu.mybatis.model.Player" alias="Player"/>
-        <!--<typeAlias type="lt.vu.mybatis.model.Game" alias="Game"/>
         <typeAlias type="lt.vu.mybatis.model.Language" alias="Language"/>
-        <typeAlias type="lt.vu.mybatis.model.Rating" alias="Rating"/>-->
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -19,10 +15,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mybatis.xml/TeamMapper.xml"/>
-        <mapper resource="mybatis.xml/PlayerMapper.xml"/>
-        <!--<mapper resource="mybatis.xml/GameMapper.xml"/>
-        <mapper resource="mybatis.xml/RatingMapper.xml"/>
-        <mapper resource="mybatis.xml/LanguageMapper.xml"/>-->
+        <mapper resource="mybatis.xml/LanguageMapper.xml"/>
     </mappers>
 </configuration>

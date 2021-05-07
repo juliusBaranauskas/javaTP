@@ -13,7 +13,7 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(name = "Game.getAll", query = "select g from Game as g")
 })
-@Table(name = "GAME")
+@Table(name = "game")
 @Getter
 @Setter
 public class Game implements Serializable {
@@ -22,16 +22,25 @@ public class Game implements Serializable {
     }
 
     @Id
+    @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "GAME_NAME", nullable = false)
+    @Getter
+    @Setter
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @ManyToMany
     @Getter
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "game_lang",
+            joinColumns = @JoinColumn(name = "game"),
+            inverseJoinColumns = @JoinColumn(name = "language"))
     private List<Language> languages = new ArrayList<>();
 
+    @Getter
+    @Setter
     private String description;
 
     @OneToMany(mappedBy = "game")

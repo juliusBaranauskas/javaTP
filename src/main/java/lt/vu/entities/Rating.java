@@ -1,6 +1,7 @@
 package lt.vu.entities;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -17,15 +18,24 @@ public class Rating {
     private Integer id;
 
     @Getter
+    @Setter
     private Integer score;
 
     @Getter
+    @Setter
     private String comment;
 
-    @ManyToOne()
+    @ManyToOne
+    @JoinColumn(name = "game_id", referencedColumnName = "id")
+    @Setter
+    @Getter
     private Game game;
 
     public Rating() {
+    }
+
+    public Rating(Game game) {
+        this.game = game;
     }
 
     public Rating(Integer score, Game game) {
