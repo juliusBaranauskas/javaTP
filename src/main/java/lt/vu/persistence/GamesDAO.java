@@ -6,6 +6,8 @@ import lt.vu.entities.Game;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
@@ -23,8 +25,9 @@ public class GamesDAO {
         this.em.persist(game);
     }
 
+    @Transactional
     public Game findOne(Integer id) {
-        return em.find(Game.class, id);
+        return em.find(Game.class, id, LockModeType.OPTIMISTIC);
     }
 
     public Game update(Game game){

@@ -2,11 +2,16 @@
 <beans
         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-                      http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
         bean-discovery-mode="annotated">
 
     <interceptors>
         <class>lt.vu.interceptors.MethodLogger</class>
     </interceptors>
+    <decorators>
+        <class>lt.vu.services.VATDecorator</class>
+    </decorators>
+    <alternatives>
+        <class>lt.vu.services.CasualFiddler</class>
+    </alternatives>
 </beans>

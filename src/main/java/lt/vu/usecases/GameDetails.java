@@ -13,16 +13,23 @@ import lt.vu.persistence.RatingsDAO;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Model
-@Transactional
-public class GameDetails {
+import lt.vu.services.GameRatingFiddler;
+import org.primefaces.context.RequestContext;
+
+@ViewScoped
+@Named
+@Getter @Setter
+public class GameDetails implements Serializable {
 
     @Inject
     private GamesDAO gamesDAO;
@@ -32,6 +39,9 @@ public class GameDetails {
 
     @Inject
     private LanguagesDAO languagesDAO;
+
+    @Inject
+    private GameRatingFiddler gameRatingFiddler;
 
     @Getter
     @Setter
@@ -56,6 +66,7 @@ public class GameDetails {
     private List<Integer> selectedLanguages;
 
     @PostConstruct
+    @Transactional
     public void init() {
         Map<String, String> requestParameters =
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
@@ -92,10 +103,23 @@ public class GameDetails {
             this.gamesDAO.update(this.game);
 
         } catch (OptimisticLockException e) {
-            return "gameDetails?faces-redirect=true&gameId=" + this.game.getId().toString() + "&error=optimistic-lock-exception";
+            RequestContext context = RequestContext.getCurrentInstance();
+            context.execute("PF('confirmDialog').show();");
+            return "gameDetails?faces-redirect=true&gameId=" + this.game.getId().toString();
         }
 
         return "gameDetails?faces-redirect=true&" + "gameId=" + this.game.getId().toString() ;
+    }
+
+    @LoggedInvocation
+    @Transactional(Transactional.TxType.REQUIRES_NEW)
+    public void forceAddGame() {
+        Game game1 = this.gamesDAO.findOne(this.game.getId());
+        game1.setLanguages(this.game.getLanguages());
+        game1.setName(this.game.getName());
+        game1.setDescription(this.game.getDescription());
+
+        this.gamesDAO.update(game1);
     }
 
     private void addNewRating() {
@@ -106,4 +130,11 @@ public class GameDetails {
     private void loadAllLanguages(){
         this.allLanguages = languagesDAO.loadAll();
     }
+
+    @Transactional
+    public String fiddleRatings() {
+        gameRatingFiddler.increaseBy(this.game.getId(), 1);
+        return "gameDetails?faces-redirect=true&gameId=" + this.game.getId().toString();
+    }
+
 }

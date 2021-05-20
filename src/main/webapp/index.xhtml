@@ -11,7 +11,7 @@
     <h2>Available games:</h2>
     <ol>
         <ui:repeat value="#{games.allGames}" var="game">
-            <span><h:link value="#{game.name}" outcome="gameDetails?gameId=#{game.id}" /></span><br/>
+            <span><h:link value="#{game.name}" outcome="gameDetails?gameId=#{game.id}" /> <p>"#{game.averageRating}"</p> </span><br/>
         </ui:repeat>
     </ol>
 

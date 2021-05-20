@@ -28,6 +28,12 @@
       <h:commandButton value="Create" action="#{languageCreation.addLanguage}" />
    </h:form>
 
+   <h:form>
+      <h:outputText value="#{generateGodParticleNumber.generationStatus}" />
+      <h:commandButton value="Generate" action="#{generateGodParticleNumber.generateGodParticleNumber}" disabled="#{generateGodParticleNumber.generationRunning}"/>
+   </h:form>
+   <br/>
+
    <h:link value="Back home" outcome="/index"/>
 </h:body>
 </html>

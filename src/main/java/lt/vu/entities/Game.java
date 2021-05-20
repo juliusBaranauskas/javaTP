@@ -43,6 +43,9 @@ public class Game implements Serializable {
     @Setter
     private String description;
 
+    @Version
+    private int version;
+
     @OneToMany(mappedBy = "game")
     private List<Rating> ratings = new ArrayList<>();
 
